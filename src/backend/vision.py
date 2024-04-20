@@ -1,6 +1,5 @@
 import base64
 import requests
-from PIL import Image
 from heic2png import HEIC2PNG
 
 
@@ -12,8 +11,7 @@ class OpenAIIntegration():
 
     # Function to encode the image
     def encode_image(self, image_path):
-        with open(image_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
+        return base64.b64encode(image_path.file.read()).decode('utf-8')
 
     def convert_image(self, image_path):
         heic_img = HEIC2PNG(image_path, quality=100)
@@ -22,7 +20,8 @@ class OpenAIIntegration():
         image_path.replace("HEIC", "png")
 
     def request(self):
-        if self.image_path.path.endswith(".HEIC"):
+        # if self.image_path.path.endswith(".HEIC"):
+        if self.image_path.content_type == "image/heic":
             self.convert_image(self.image_path)
 
         # Getting the base64 string

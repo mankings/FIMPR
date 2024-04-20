@@ -35,11 +35,12 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post("/upload-image/")
-async def upload_image(description: Optional[str] = Form(None), image: UploadFile = File(...)):
+async def upload_image(image: UploadFile = File(...)):
     """
     Upload an image along with its metadata.
     """
-    open_ai = OpenAIIntegration(image.filename)
+    print(f'\nImage: {image.filename}')
+    open_ai = OpenAIIntegration(image)
     response = open_ai.request()
 
     return response
