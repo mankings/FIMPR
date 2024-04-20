@@ -8,7 +8,7 @@ import Scan from "./Scan";
 
 
 
-function Context() {
+function AppShell() {
 
 
   return (
@@ -23,4 +23,4 @@ function Context() {
   );
 }
 
-export default Context;
+export default AppShell;

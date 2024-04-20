@@ -18,6 +18,7 @@ function Landing() {
         <h1 className="text-5xl font-bold">Bem-vind@ ao <span className="text-primary font-black tracking-wider	">FIMPR</span></h1>
         <button className="btn btn-outline btn-primary w-fit">Saber mais</button>
         </div>
+        {/* Items do meio */}
         <div className="w-full flex flex-col gap-4">
             <div className="flex flex-row gap-4 h-fit w-fit items-center">
                 <AiFillSecurityScan className="text-3xl text-primary"></AiFillSecurityScan>
@@ -34,7 +35,7 @@ function Landing() {
             
 
         </div>
-        {/* button cards */}
+        {/* Utilizar o FIMPR */}
     <div className="flex flex-col gap-4">
         <form>
         {/* Hidden file input */}
@@ -59,13 +60,6 @@ function Landing() {
             </div>
         </button>
         </form>
-            {/*<button className="w-full bg-primary p-4 text-primary-content flex flex-row gap-4 items-center text-left">
-                <div className="h-fit text-3xl "><FaBookOpenReader /></div>
-                <div>
-                    <span className="text-2xl font-bold">F.A.Q</span>
-                    <p>informações sobre a área</p>
-                </div>
-            </button>*/} 
         </div>
     </div>
   );

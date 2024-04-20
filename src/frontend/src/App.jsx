@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Auth from './pages/Auth'
 import Register from './pages/Register'
-import Context from './pages/Context'
+import AppShell from './pages/AppShell'
 
 function App() {
 
@@ -11,10 +11,10 @@ function App() {
       <Router>
         <Routes>
         {/* AUTH */}
-          <Route path="/" element={<Auth></Auth>} />
+          <Route path="/login" element={<Auth></Auth>} />
           <Route path="/register" element={<Register></Register>} />
         {/* Landing */}
-          <Route path="/landing" element={<Context></Context>} />
+          <Route path="/" element={<AppShell></AppShell>} />
         </Routes>
       </Router>
     </div>
