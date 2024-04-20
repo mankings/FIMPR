@@ -38,9 +38,7 @@ class ImageClassificationBase(nn.Module):
 class ResNet(ImageClassificationBase):
     def __init__(self):
         super().__init__()
-        # Use a pretrained model
         self.network = models.resnet50(pretrained=True)
-        # Replace last layer
         num_ftrs = self.network.fc.in_features
         self.network.fc = nn.Linear(num_ftrs, N_CLASSES)
         self.classes = ['cardboard', 'plastic', 'metal', 'glass', 'trash', 'paper']
@@ -55,18 +53,3 @@ class Model():
         self.model.load_state_dict(torch.load(
             '../model/model.pt', map_location=torch.device('cpu')))
         self.model.eval()
-
-    # def predict(self, image):
-    #     y = self.model(image)
-    #     _, preds = torch.max(y, dim=1)
-    #     result = self.model.classes[preds[0].item()]
-    #     print("The image resembles", result + ".")
-    #     return result
-
-    
-    
-    # def predict_external_image(self, image_name):
-    #     image = Image.open(Path('./input/' + image_name))
-
-    #     example_image = transformations(image)
-    
