@@ -19,6 +19,7 @@ class OpenAIIntegration():
         print("HEIC image converted to PNG")
         image_path.replace("HEIC", "png")
 
+
     def request(self):
         # if self.image_path.path.endswith(".HEIC"):
         if self.image_path.content_type == "image/heic":
