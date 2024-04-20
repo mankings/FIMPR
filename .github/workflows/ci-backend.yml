@@ -14,8 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: raftario/setup-rust-action@v1
-    - run: cargo test
+    - name: Install latest nightly
+      uses: actions-rs/toolchain@v1
+      with:
+          toolchain: stable
+          override: true
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
