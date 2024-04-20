@@ -6,7 +6,7 @@ on:
       - main
     paths:
         - 'src/backend/**'
-        - 'deploy/Dockerfile.backend'
+        - 'deploy/*.backend'
 
 jobs:
   test-and-build:

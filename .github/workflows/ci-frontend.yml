@@ -6,7 +6,7 @@ on:
       - main
     paths:
         - 'src/frontend/**'
-        - 'deploy/Dockerfile.frontend'
+        - 'deploy/*.frontend'
 
 jobs:
   test-and-build:
