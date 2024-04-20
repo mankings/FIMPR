@@ -1,66 +1,50 @@
-from vision import OpenAIIntegration
-# from schema import ImageInput
-from typing import Optional
-# from config import CONFIG
-# # import torch
-# from model import Model
-# import shutil   
-
-from fastapi import FastAPI, Form, File, UploadFile
-# from fastapi.logger import logger
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import base64
+import io
+from PIL import Image
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-# from predict import predict
+from vision import request
 
 app = FastAPI()
 
-# @app.on_event("startup")
-# async def startup_event():
-#     """
-#     Initialize FastAPI and add variables
-#     """
+# Define a Pydantic model for incoming data
+class ImageData(BaseModel):
+    image: str  # Base64 encoded image string
 
-#     # logger.info('Running envirnoment: {}'.format(CONFIG['ENV']))
-#     # logger.info('PyTorch using device: {}'.format(CONFIG['DEVICE']))
-
-#     # Initialize the pytorch model
-#     # model = Model()
-    
-#     # add model and other preprocess tools too app state
-#     app.package = {
-#         "model": model
-#     }
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/")   
 async def root():
     return {"message": "Hello World"}
 
 @app.post("/upload-image/")
-async def upload_image(image: UploadFile = File(...)):
+async def upload_image(data: ImageData):
     """
-    Upload an image along with its metadata.
+    Upload an image encoded in base64 and process it using OpenAIIntegration.
     """
-    print(f'\nImage: {image.filename}')
-    open_ai = OpenAIIntegration(image)
-    response = open_ai.request()
+    try:
+        # Decode the base64 string to get image data
+        image_data = base64.b64decode(data.image.split(",")[1])
+        # Create an image file from binary data
+        image_file = io.BytesIO(image_data)
+        image = Image.open(image_file)
+        image.save("uploaded_image.jpg")  # Temporarily save the image for processing
 
-    return response
-    # with open(f'../../model/dataset/test/{image.filename}', 'wb') as buffer:
-    #     shutil.copyfileobj(await image.read(), buffer)
+        # Initialize the OpenAI integration with the image file path
+        response = request("uploaded_image.jpg")  # Make the request to OpenAI's API
 
-    # type = predict(app.package, image.filename)
-    
-    # results = {
-    #     'pred': type,
-    # }
-
-
-    # return {
-    #     "error": False,
-    #     "results": results
-    # }
+        return {"result": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing the image: {str(e)}")
 
 if __name__ == '__main__':
-    # server api
-    uvicorn.run("main:app", host="0.0.0.0", port=8080,
-                reload=True, debug=True, log_config="log.ini"
-                )
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True, debug=True)
