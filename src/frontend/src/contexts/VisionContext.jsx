@@ -6,7 +6,9 @@ export const VisionContext = createContext();
 export const VisionProvider = ({ children }) => {
     const [base64, setBase64] = useState(null);
     const fileInputRef = React.useRef(null);
-
+    const [info, setInfo] = useState(null);
+    const [loading, setLoading] = useState(false); // Added loading state
+    const [submitted, setSubmitted] = useState(false);
     const handleButtonClick = () => {
         fileInputRef.current.click();
     };
@@ -16,7 +18,7 @@ export const VisionProvider = ({ children }) => {
         if (file && file.type.startsWith('image/')) {
             const base64 = await convertFileToBase64(file);
             setBase64(base64);
-            sendFileToServer(base64);
+            sendFileToServer(base64)
         } else {
             console.error('Please select an image file.');
         }
@@ -32,18 +34,33 @@ export const VisionProvider = ({ children }) => {
     };
 
     const sendFileToServer = (base64) => {
+        setLoading(true);
         const url = 'http://127.0.0.1:8000/upload-image/';
         axios.post(url, { image: base64 })
             .then(response => {
-                console.log('Image uploaded successfully:', response.data);
+                const content = response.data.result.choices[0].message.content;
+
+                // Split the content by newlines and then by the ': ' delimiter to create key-value pairs
+                const lines = content.split('\n');
+                const info = {};
+                lines.forEach(line => {
+                    const [key, value] = line.split(': ').map(s => s.trim());
+                    info[key.toLowerCase()] = value; // Convert the key to lowercase for consistent JSON keys
+                });
+
+                console.log('Content JSON:', info);
+                setInfo(info);
+                setLoading(false);
+                setSubmitted(true);
             })
             .catch(error => {
                 console.error('Error uploading image:', error);
+                setLoading(false);
             });
     };
 
     return (
-        <VisionContext.Provider value={{ handleButtonClick, handleFileChange, base64, fileInputRef }}>
+        <VisionContext.Provider value={{ handleButtonClick, handleFileChange, base64, fileInputRef, info, loading, submitted, setSubmitted }}>
             {children}
         </VisionContext.Provider>
     );
