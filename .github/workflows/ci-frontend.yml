@@ -6,7 +6,6 @@ on:
       - main
     paths:
         - 'src/frontend/**'
-        - 'deploy/*.frontend'
 
 jobs:
   test-and-build:
