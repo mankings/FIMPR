@@ -8,7 +8,7 @@ export default {
     extend: {},
   },
   daisyui: {
-    themes: ["cupcake", "dim"],
+    themes: ["dim","cupcake"],
   },
   plugins: [require("daisyui")],
 }
