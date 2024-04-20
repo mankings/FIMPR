@@ -4,7 +4,7 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile.frontend
     ports:
-      - "80:80"  # Map HTTP port for local development
+      - "80:3000"  # Map HTTP port for local development
     volumes:
       - ./src/frontend/dist:/usr/share/nginx/html  # Optional: bind mount for live code changes
     environment:

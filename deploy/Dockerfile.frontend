@@ -1,18 +1,30 @@
-FROM node:lts-alpine
+# Use the official Node.js 18 image.
+# Use an alpine version for smaller image size.
+FROM node:18-alpine
 
+# Set the working directory in the container
 WORKDIR /app
 
-COPY package*.json .
-RUN npm i --omit=dev && \
-    npm i -g typescript && npm i --save-dev @types/react && \
-    npm i -g serve
+# Copy package.json and package-lock.json (or yarn.lock)
+COPY src/frontend/package*.json ./
 
-COPY . .
+# Install dependencies
+# Use `--frozen-lockfile` to avoid installing new versions of dependencies.
+RUN npm install --frozen-lockfile
 
+# Copy the rest of your application code
+COPY ./src/frontend .
+
+# Build the app using Vite
 RUN npm run build
 
-WORKDIR /app/dist
+# Install serve to serve your static files on production
+RUN npm install -g serve
 
+# The port your container will listen on.
 EXPOSE 3000
 
-CMD ["serve", "-s"]
+# Command to run the serve when the container starts
+CMD ["serve", "-s", "dist"]
+
+
