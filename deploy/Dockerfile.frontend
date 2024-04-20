@@ -1,13 +1,18 @@
-FROM node:18-alpine3.17 as build
+FROM node:lts-alpine
 
-WORKDIR /code
-COPY ./src/frontend /code
+WORKDIR /app
 
-RUN npm install
+COPY package*.json .
+RUN npm i --omit=dev && \
+    npm i -g typescript && npm i --save-dev @types/react && \
+    npm i -g serve
+
+COPY . .
+
 RUN npm run build
 
-FROM nginx:1.21-alpine
+WORKDIR /app/dist
 
-COPY --from=build /code/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+CMD ["serve", "-s"]

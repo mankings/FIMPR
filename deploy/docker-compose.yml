@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   frontend:
     build:
@@ -12,7 +10,7 @@ services:
     environment:
       - API_URL=http://backend:8000
     depends_on:
-      - api
+      - backend
     restart: always
 
   backend:
