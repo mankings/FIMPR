@@ -4,7 +4,26 @@ import click
 @click.argument('filename')
 def main(filename):
     polygons = readPolygonsFromFile(filename)
+
+    layers = {}
+    for i, polygon1 in polygons.items():
+        area = calcArea(polygon1)
+        layer = 0
+        for j, polygon2 in polygons.items():
+            if i == j:
+                continue
+            if polygonInPolygon(polygon1, polygon2):
+                    layer += 1
+        layers[i] = layer
+
+    totalArea = 0
+    for p in polygons:
+        if layers[p] % 2 == 0:
+            totalArea += calcArea(polygons[p])
+        else:
+            totalArea -= calcArea(polygons[p])
     
+    print(totalArea)
 
 def readPolygonsFromFile(filename):
     polygons = []
@@ -40,6 +59,7 @@ def polygonInPolygon(polygon1, polygon2):
         if not pointInPolygon(vertex, polygon2):
             return False
     return True
+
 
 if __name__ == "__main__":
     main()
