@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: 
+      context: ..
+      dockerfile: deploy/Dockerfile.frontend
+    ports:
+      - "80:80"  # Map HTTP port for local development
+    volumes:
+      - ./src/frontend/dist:/usr/share/nginx/html  # Optional: bind mount for live code changes
+    environment:
+      - API_URL=http://backend:8000
+    depends_on:
+      - api
+    restart: always
+
+  backend:
+    build: 
+      context: ..
+      dockerfile: deploy/Dockerfile.backend
+    ports:
+      - "8000:8000"  # Map API port
+    restart: always
