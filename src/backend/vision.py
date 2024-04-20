@@ -3,6 +3,7 @@ import requests
 from heic2png import HEIC2PNG
 
 
+
 class OpenAIIntegration():
     def __init__(self, image_path=None):
         self.api_key = "sk-proj-HAmWVwyEoVQnnlO6HgbZT3BlbkFJLPOgbVEubUFYNP7qBuCt"
