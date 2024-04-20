@@ -1,44 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AiFillSecurityScan } from "react-icons/ai";
 import { LuScan } from "react-icons/lu";
-import axios from 'axios'; // Make sure to install axios if not already done
+import { VisionContext } from '../contexts/VisionContext';
 
 function Landing() {
-  const fileInputRef = React.useRef(null);
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-      const base64 = await convertFileToBase64(file);
-      sendFileToServer(base64);
-    } else {
-      console.error('Please select an image file.');
-    }
-  };
-
-  const convertFileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-      reader.readAsDataURL(file);
-    });
-  };
-
-  const sendFileToServer = (base64) => {
-    const url = 'http://127.0.0.1:8000/upload-image/';
-    axios.post(url, { image: base64 })
-      .then(response => {
-        console.log('Image uploaded successfully:', response.data);
-      })
-      .catch(error => {
-        console.error('Error uploading image:', error);
-      });
-  };
+  const { handleButtonClick, handleFileChange, fileInputRef } = useContext(VisionContext);
 
   return (
     <div className="box-border flex flex-col justify-around h-full">

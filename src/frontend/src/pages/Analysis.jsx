@@ -12,11 +12,10 @@ function Analysis() {
           duration: 1200, // controls animation duration
         });
     }, []);
-
     return (
         <div className="flex flex-col items-center justify-center h-fit gap-4 overflow-hidden h-[calc(100vh*2 - 32px)]">
-            <div className="flex flex-col text-center items-center gap-4 h-screen" data-aos="fade-up">
-                <div className="flex flex-col gap-2 text-center items-center h-fit" data-aos="flip-left">
+            <div className="flex flex-col items-center h-screen gap-4 text-center" data-aos="fade-up">
+                <div className="flex flex-col items-center gap-2 text-center h-fit" data-aos="flip-left">
                     <MdRecycling className="text-7xl" />
                     <span className="text-6xl font-bold">FIMPR</span>
                 </div>
@@ -28,10 +27,10 @@ function Analysis() {
             </div>
             <div className="flex flex-col items-center w-full justify-around h-[calc(100vh-32px)]">
                 <span className="text-4xl font-bold tracking-wider" data-aos="zoom-in-up">Our Analysis</span>
-                <div className="btn btn-primary w-full h-36 text-primary-content" data-aos="zoom-out">a</div>
-                <div className="btn btn-success w-full h-36 text-primary-content" data-aos="slide-up">You should</div>
-                <div className="btn btn-warning w-full h-36" data-aos="fade-right"></div>
-                <button className="btn btn-primary p-8 w-fit text-primary-content flex flex-col items-center text-1xl" data-aos="flip-right">
+                <div className="w-full btn btn-primary h-36 text-primary-content" data-aos="zoom-out">a</div>
+                <div className="w-full btn btn-success h-36 text-primary-content" data-aos="slide-up">You should</div>
+                <div className="w-full btn btn-warning h-36" data-aos="fade-right"></div>
+                <button className="flex flex-col items-center p-8 btn btn-primary w-fit text-primary-content text-1xl" data-aos="flip-right">
                     <IoArrowBack className="text-3xl" />
                     Back
                 </button>
