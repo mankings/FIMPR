@@ -20,6 +20,7 @@ jobs:
         python-version: '3.x'
     - name: Install dependencies
       run: |
+        cd src/backend
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Configure AWS credentials
