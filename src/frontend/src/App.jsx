@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Auth from './pages/Auth'
 import Register from './pages/Register'
 import AppShell from './pages/AppShell'
+import Analysis from './pages/Analysis'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/register" element={<Register></Register>} />
         {/* Landing */}
           <Route path="/" element={<AppShell></AppShell>} />
+          <Route path="/teste" element={<Analysis></Analysis>} />
         </Routes>
       </Router>
     </div>
