@@ -2,6 +2,10 @@ FROM python:3.9-alpine
 
 WORKDIR /code
 
+# install rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+
 COPY ./src/backend/requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
