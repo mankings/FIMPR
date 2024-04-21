@@ -1,14 +1,12 @@
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.btn-animate {
+  animation: scaleAnimation 1s ease-in-out infinite; /* Repeat the animation infinitely */
 }
 
-.loader {
-  animation: spin 1s linear infinite;
-  border-color: #ddd transparent #ddd transparent; /* Assuming #ddd is similar to your gray */
+@keyframes scaleAnimation {
+  0%, 100% {
+    transform: scale(1);  /* Start and end at normal scale */
+  }
+  50% {
+    transform: scale(1.1); /* Scale up to 1.1 at the midpoint */
+  }
 }
