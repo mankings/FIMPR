@@ -76,7 +76,7 @@ function Analysis() {
                     <div className="flex justify-between">
                         <div className="text-5xl card-title">where?</div>
                             <a href={mapsLink} target="_blank" rel="noreferrer">
-                                <IoIosPin className={`text-6xl animate-pulse ${mapsLink ? '' : 'hidden'}`}></IoIosPin>
+                                <IoIosPin className={`text-6xl animate-pulse`}></IoIosPin>
                             </a>
                     </div>
                     <Bins bins={info.bins}></Bins>
