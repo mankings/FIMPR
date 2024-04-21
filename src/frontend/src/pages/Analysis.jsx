@@ -12,7 +12,7 @@ function Analysis() {
     const { info } = useContext(VisionContext);
     const { getMapsLink, locations } = useContext(LocationContext);
     const [recyclable, setRecyclable] = useState(true);
-    const [mapsLink, setMapsLink] = useState(''); // New state for the maps link
+    const [mapsLink, setMapsLink] = useState('');
 
     useEffect(() => {
         if (info) {
@@ -45,7 +45,7 @@ function Analysis() {
         if (info && info.bins && info.bins.length > 0) {
             fetchMapsLink();
         }
-    }, [info, getMapsLink]); 
+    }, [info, getMapsLink]);
 
     useEffect(() => {
         // Scroll to the bottom of the page after the component mounts
@@ -75,9 +75,10 @@ function Analysis() {
                 <div className="card-body">
                     <div className="flex justify-between">
                         <div className="text-5xl card-title">where?</div>
-                            <a href={mapsLink} target="_blank" rel="noreferrer">
-                                <IoIosPin className={`text-6xl animate-pulse`}></IoIosPin>
-                            </a>
+                        <a href={VITE_MAPS_LINK}
+                            target="_blank" rel="noreferrer">
+                            <IoIosPin className={`text-6xl animate-pulse`}></IoIosPin>
+                        </a>
                     </div>
                     <Bins bins={info.bins}></Bins>
                 </div>
