@@ -24,14 +24,14 @@ function SubmitPhoto() {
               />
               <button
                 type="button"
-                className="px-4 py-10 btn btn-primary h-fit text-primary-content"
+                className="px-4 py-10 btn btn-primary h-fit text-primary-content animate-pulse"
                 onClick={handleButtonClick}>
                 <div className="h-fit text-8xl">
                   <LuScan />
                 </div>
                 <div>
-                  <span className="text-5xl font-bold">FIMPaR</span>
-                  <p className="font-normal">usa a nossa ferramenta de reconhecimento de resíduos</p>
+                  <span className="font-bold text-7xl ">FIMPaR</span>
+                  <p className="text-xl font-normal">click here to scan some trash</p>
                 </div>
               </button>
             </form>

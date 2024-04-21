@@ -16,7 +16,7 @@ const Bins = ({ bins }) => {
                 <div key={index} className="flex-col items-center justify-end gap-2">
                     <RiDeleteBin5Fill
                         style={{
-                            color: binColors[bin.toLowerCase()] || '#ccc', // Color the icon based on the bin type
+                            color: binColors.hasOwnProperty(bin.toLowerCase()) ? binColors[bin.toLowerCase()] : '#ccc', // Color the icon based on the bin type
                             fontSize: '80px'  // Set the icon size (optional)
                         }}
                     />

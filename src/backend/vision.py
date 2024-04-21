@@ -30,7 +30,7 @@ def request(image_path):
         "content": [
             {
             "type": "text",
-            "text": "You are given an image of an object. Your response is limited in text. You are to only return three facts. RECYCLABLE: yes/no/partially; INSTRUCTIONS: [maximum of one sentence describing how to recycle the object (do not mention in which bin) and if there is no recyclable parts]; BINS: yellow/blue/green/none [can be more than one]"
+            "text": "You are given an image of an object. Your response is limited in text. You are to only return three facts. RECYCLABLE: yes/no; INSTRUCTIONS: [maximum of one sentence describing how to recycle the object (do not mention in which bin) and if there is no recyclable parts]; BINS: yellow/blue/green/none [can be more than one]"
             },
             {
             "type": "image_url",
