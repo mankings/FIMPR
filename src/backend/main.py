@@ -57,7 +57,6 @@ async def startup():
 async def shutdown():
     await database.disconnect()
 
-
 @app.get("/")   
 async def root():
     return {"message": "Hello World"}
