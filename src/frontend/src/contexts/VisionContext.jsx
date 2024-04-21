@@ -59,8 +59,14 @@ export const VisionProvider = ({ children }) => {
             });
     };
 
+    function resetEverything() {
+        setBase64(null);
+        setInfo(null);
+        setLoading(false);
+        setSubmitted(false);
+    }
     return (
-        <VisionContext.Provider value={{ handleButtonClick, handleFileChange, base64, fileInputRef, info, loading, submitted, setSubmitted }}>
+        <VisionContext.Provider value={{ handleButtonClick, handleFileChange, base64, fileInputRef, info, loading, submitted, setSubmitted, resetEverything }}>
             {children}
         </VisionContext.Provider>
     );
