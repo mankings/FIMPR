@@ -13,9 +13,6 @@ function SubmitPhoto() {
     <div className={`box-border flex flex-col ${loading ? 'justify-start' : 'justify-around'} h-full`}>
       {!loading ? (
         <>
-          <div className="flex flex-col gap-2 mt-20 h-fit">
-            <h1 className="text-5xl font-bold">Bem-vind@ ao <span className="font-black tracking-wider text-primary ">FIMPR</span></h1>
-          </div>
           <div className="flex flex-col gap-4">
             <form>
               <input
@@ -27,13 +24,13 @@ function SubmitPhoto() {
               />
               <button
                 type="button"
-                className="px-4 py-4 btn btn-primary h-fit text-primary-content animate-pulse"
+                className="px-4 py-10 btn btn-primary h-fit text-primary-content"
                 onClick={handleButtonClick}>
                 <div className="h-fit text-8xl">
                   <LuScan />
                 </div>
                 <div>
-                  <span className="text-2xl font-bold">FIMPaR</span>
+                  <span className="text-5xl font-bold">FIMPaR</span>
                   <p className="font-normal">usa a nossa ferramenta de reconhecimento de resíduos</p>
                 </div>
               </button>
