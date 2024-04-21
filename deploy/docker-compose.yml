@@ -1,14 +1,18 @@
 services:
   frontend:
-    image: public.ecr.aws/s0o1g6r1/frontend
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.frontend
     ports:
-      - "80:4173"
+      - "80:4173"  # Map HTTP port for local development
     depends_on:
       - backend
     restart: always
 
   backend:
-    image: public.ecr.aws/s0o1g6r1/backend
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.backend
     ports:
       - "8000:8000"
     restart: always
