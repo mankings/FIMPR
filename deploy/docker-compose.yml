@@ -5,7 +5,7 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile.frontend
     ports:
-      - "80:4173"  # Map HTTP port for local development
+      - "80:4173"
     depends_on:
       - backend
     restart: always

@@ -35,7 +35,7 @@ export const VisionProvider = ({ children }) => {
 
     const sendFileToServer = (base64) => {
         setLoading(true);
-        const url = 'http://51.44.19.60:8000/upload-image';
+        const url = 'http://35.181.153.8:8000/upload-image';
         axios.post(url, { image: base64 })
             .then(response => {
                 const content = response.data.result.choices[0].message.content;
