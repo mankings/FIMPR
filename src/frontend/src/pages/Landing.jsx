@@ -1,19 +1,19 @@
 import Top from "../components/Top"
-import Landing from "../components/Landing";
+import SubmitPhoto from "../components/SubmitPhoto";
 
 
 
-function AppShell() {
+function Landing() {
 
 
   return (
     <div className="box-border flex flex-col justify-around max-h-screen">
       <Top></Top>
       <div className="h-[calc(100vh-96px)] flex flex-col">
-        <Landing></Landing>
+        <SubmitPhoto></SubmitPhoto>
       </div>
     </div>
   );
 }
 
-export default AppShell;
+export default Landing;
