@@ -1,22 +1,14 @@
 services:
   frontend:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile.frontend
+    image: public.ecr.aws/s0o1g6r1/frontend
     ports:
-      - "80:3000"  # Map HTTP port for local development
-    volumes:
-      - ./src/frontend/dist:/usr/share/nginx/html  # Optional: bind mount for live code changes
-    environment:
-      - API_URL=http://backend:8000
+      - "80:4173"
     depends_on:
       - backend
     restart: always
 
   backend:
-    build: 
-      context: ..
-      dockerfile: deploy/Dockerfile.backend
+    image: public.ecr.aws/s0o1g6r1/backend
     ports:
-      - "8000:8000"  # Map API port
+      - "8000:8000"
     restart: always
