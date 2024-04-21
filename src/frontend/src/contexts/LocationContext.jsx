@@ -5,14 +5,11 @@ export const LocationContext = createContext();
 
 export const LocationProvider = ({ children }) => {
     const [locations, setLocations] = useState([]);
-    const [userLatitude, setUserLatitude] = useState(0);
-    const [userLongitude, setUserLongitude] = useState(0);
 
     useEffect(() => {
         fetchLocations();
-        getUserLocation();
-    }
-    , []);
+    }, []);
+
     const fetchLocations = async () => {
         try {
             const response = await axios.get('http://localhost:8000/ecopoints/');
@@ -23,29 +20,34 @@ export const LocationProvider = ({ children }) => {
         }
     }
 
-    const getUserLocation = async () => {
-        try {
+    // Wrapped navigator.geolocation.getCurrentPosition in a Promise
+    const getUserLocation = () => {
+        return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const { userLatitude, userLongitude } = position.coords;
-                    setUserLatitude(userLatitude);
-                    setUserLongitude(userLongitude);
-                    console.log(userLatitude, userLongitude);
-                }, (error) => {
-                    console.error(error);
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+                    resolve({ latitude, longitude });
+                }, error => {
+                    reject(error);
                 });
             } else {
-                console.error("Geolocation is not supported by this browser.");
+                reject(new Error("Geolocation is not supported by this browser."));
             }
+        });
+    };
+
+    async function getMapsLink(location) {
+        try {
+            const { latitude, longitude } = await getUserLocation();
+            return `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${location.lat},${location.lng}`;
         } catch (error) {
             console.error(error);
+            return "Unable to get location";
         }
     }
 
-
-
     return (
-        <LocationContext.Provider value={{ }}>
+        <LocationContext.Provider value={{ locations, getMapsLink }}>
             {children}
         </LocationContext.Provider>
     );

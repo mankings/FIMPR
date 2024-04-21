@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
 import Top from "../components/Top";
 import { VisionContext } from "../contexts/VisionContext";
+import { LocationContext } from "../contexts/LocationContext";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Bins from "../components/Bins";
 import Footer from "../components/Footer";
+import { IoIosPin } from "react-icons/io";
 
 function Analysis() {
     const { info } = useContext(VisionContext);
+    const { getMapsLink, locations } = useContext(LocationContext);
     const [recyclable, setRecyclable] = useState(true);
+    const [mapsLink, setMapsLink] = useState(''); // New state for the maps link
 
     useEffect(() => {
         if (info) {
             setRecyclable(info.recyclable.toLowerCase() === 'no' ? false : true);
         }
     }, [info]);
+
     useEffect(() => {
         AOS.init({
             duration: 2500,
@@ -25,6 +30,26 @@ function Analysis() {
     useEffect(() => {
         AOS.refresh();
     }, [recyclable]);
+
+    // Fetch the maps link asynchronously
+    useEffect(() => {
+        const fetchMapsLink = async () => {
+            // Assuming you have a specific location object to pass to getMapsLink
+            const location = locations[0];
+            // Example location
+            try {
+                const link = await getMapsLink(location);
+                setMapsLink(link);
+            } catch (error) {
+                console.error('Failed to get maps link:', error);
+            }
+        };
+
+        if (info && info.bins && info.bins.length > 0) {
+            fetchMapsLink();
+        }
+    }, [info, getMapsLink]); // Depend on info and getMapsLink to re-run the effect if they change
+
     console.log('recyclable:', recyclable)
     return (
         <div className="flex flex-col items-center justify-around h-fit gap-4 overflow-hidden h-[calc(100vh*2 - 32px)]">
@@ -45,10 +70,19 @@ function Analysis() {
 
             <div className={`card w-96 text-neutral-content bg-neutral ${recyclable ? '' : 'hidden'}`} data-aos="fade-up" data-aos-delay="2800">
                 <div className="card-body">
-                    <h2 className="text-5xl card-title">where?</h2>
+                    <div className="flex justify-between">
+                        <div className="text-5xl card-title">where?</div>
+                        {mapsLink && ( // Only render the anchor tag if the maps link is available
+                            <a href={mapsLink} target="_blank" rel="noreferrer">
+                                <IoIosPin className="text-6xl animate-pulse"></IoIosPin>
+                            </a>
+                        )}
+                    </div>
                     <Bins bins={info.bins}></Bins>
                 </div>
             </div>
+
+
             <div data-aos="fade-up" data-aos-delay="3000">
                 <Footer />
             </div>
