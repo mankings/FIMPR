@@ -54,6 +54,7 @@ function Analysis() {
             behavior: 'smooth'
         });
     }, []);
+    console.log(import.meta.env.VITE_MAPS_LINK)
     return (
         <div className="flex flex-col items-center justify-around h-fit gap-4 overflow-hidden h-[calc(100vh*2 - 32px)]">
             <Top></Top>
@@ -75,7 +76,7 @@ function Analysis() {
                 <div className="card-body">
                     <div className="flex justify-between">
                         <div className="text-5xl card-title">where?</div>
-                        <a href={VITE_MAPS_LINK}
+                        <a href={"https://www.google.com/maps/dir/?api=1&destination=40.2061619,-8.4064383"}
                             target="_blank" rel="noreferrer">
                             <IoIosPin className={`text-6xl animate-pulse`}></IoIosPin>
                         </a>

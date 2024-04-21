@@ -1,5 +1,6 @@
 services:
   frontend:
+    # image: 992382475528.dkr.ecr.us-east-1.amazonaws.com/frontend:latest
     build:
       context: ..
       dockerfile: deploy/Dockerfile.frontend
@@ -10,6 +11,7 @@ services:
     restart: always
 
   backend:
+    # image: 992382475528.dkr.ecr.us-east-1.amazonaws.com/backend:latest
     build:
       context: ..
       dockerfile: deploy/Dockerfile.backend
