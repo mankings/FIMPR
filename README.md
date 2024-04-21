@@ -4,7 +4,7 @@
 
 | Nome             | Mail                      |
 |------------------|---------------------------|
-| João Monteiro    |                           |
-| Daniel Ferreira  |                           |
+| João Monteiro    | joao.mont@ua.pt           |
+| Daniel Ferreira  | dferrero17@gmail.com      |
 | Raquel Paradinha | raquelparadinha@gmail.com |
 | Miguel Matos     | miguelamatos02@gmail.com  |
