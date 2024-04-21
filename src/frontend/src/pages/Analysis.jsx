@@ -4,6 +4,7 @@ import { VisionContext } from "../contexts/VisionContext";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Bins from "../components/Bins";
+import Footer from "../components/Footer";
 
 function Analysis() {
     const { info } = useContext(VisionContext);
@@ -16,17 +17,17 @@ function Analysis() {
     }, [info]);
     useEffect(() => {
         AOS.init({
-            duration: 2000,
+            duration: 2500,
             once: true
         });
     }, []);
 
     useEffect(() => {
         AOS.refresh();
-    }, [recyclable]);
+    }, []);
     console.log('recyclable:', recyclable)
     return (
-        <div className="flex flex-col items-center justify-center h-fit gap-4 overflow-hidden h-[calc(100vh*2 - 32px)]">
+        <div className="flex flex-col items-center justify-around h-fit gap-4 overflow-hidden h-[calc(100vh*2 - 32px)]">
             <Top></Top>
             <div className={`card w-96 text-primary-content ${recyclable ? 'bg-primary' : 'bg-secondary'}`} data-aos="fade-up" data-aos-delay="200">
                 <div className="card-body">
@@ -42,13 +43,15 @@ function Analysis() {
                 </div>
             </div>
 
-            <div className={`card w-96 text-neutral-content bg-neutral ${recyclable ? '' : 'hidden'}`} data-aos="fade-up" data-aos-delay="3000">
+            <div className={`card w-96 text-neutral-content bg-neutral ${recyclable ? '' : 'hidden'}`} data-aos="fade-up" data-aos-delay="2800">
                 <div className="card-body">
                     <h2 className="text-5xl card-title">where?</h2>
                     <Bins bins={info.bins}></Bins>
                 </div>
             </div>
-
+            <div data-aos="fade-up" data-aos-delay="3000">
+                <Footer />
+            </div>
         </div>
     );
 }
