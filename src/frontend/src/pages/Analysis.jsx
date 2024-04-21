@@ -31,12 +31,9 @@ function Analysis() {
         AOS.refresh();
     }, [recyclable]);
 
-    // Fetch the maps link asynchronously
     useEffect(() => {
         const fetchMapsLink = async () => {
-            // Assuming you have a specific location object to pass to getMapsLink
             const location = locations[0];
-            // Example location
             try {
                 const link = await getMapsLink(location);
                 setMapsLink(link);
@@ -48,9 +45,9 @@ function Analysis() {
         if (info && info.bins && info.bins.length > 0) {
             fetchMapsLink();
         }
-    }, [info, getMapsLink]); // Depend on info and getMapsLink to re-run the effect if they change
+    }, [info, getMapsLink]); 
 
-    console.log('recyclable:', recyclable)
+
     return (
         <div className="flex flex-col items-center justify-around h-fit gap-4 overflow-hidden h-[calc(100vh*2 - 32px)]">
             <Top></Top>
@@ -72,11 +69,9 @@ function Analysis() {
                 <div className="card-body">
                     <div className="flex justify-between">
                         <div className="text-5xl card-title">where?</div>
-                        {mapsLink && ( // Only render the anchor tag if the maps link is available
                             <a href={mapsLink} target="_blank" rel="noreferrer">
-                                <IoIosPin className="text-6xl animate-pulse"></IoIosPin>
+                                <IoIosPin className={`text-6xl animate-pulse ${mapsLink ? '' : 'hidden'}`}></IoIosPin>
                             </a>
-                        )}
                     </div>
                     <Bins bins={info.bins}></Bins>
                 </div>
