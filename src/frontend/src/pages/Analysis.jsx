@@ -24,7 +24,7 @@ function Analysis() {
 
     useEffect(() => {
         AOS.refresh();
-    }, []);
+    }, [recyclable]);
     console.log('recyclable:', recyclable)
     return (
         <div className="flex flex-col items-center justify-around h-fit gap-4 overflow-hidden h-[calc(100vh*2 - 32px)]">
